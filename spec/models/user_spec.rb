@@ -116,9 +116,8 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Last name is invalid')
       end
       it '生年月日が空では登録できない' do
-        user = FactoryBot.build(:user)
-        user.birth_date = ''
-        user.valid?
+        @user.birth_date = ''
+        @user.valid?
         expect(user.errors.full_messages).to include("Birth date can't be blank")
       end
     end
