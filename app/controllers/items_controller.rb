@@ -17,30 +17,31 @@ class ItemsController < ApplicationController
     end
   end
   
-  def edit
-    if current_user != @item.user || Order.exists?(item_id: @item.id) 
-      redirect_to root_path
-    end
-  end
-
-  def update
-    if @item.update(item_params)
-      redirect_to item_path(@item), notice: '商品情報を更新しました。'
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
-
-  def show
-  end
   
-  def destroy
-    item = Item.find(params[:id])
-    if current_user.id == item.user_id
-      item.destroy
-    end
-    redirect_to root_path
-  end
+  # def edit
+  #   if current_user != @item.user || Order.exists?(item_id: @item.id) 
+  #     redirect_to root_path
+  #   end
+  # end
+
+  # def update
+  #   if @item.update(item_params)
+  #     redirect_to item_path(@item), notice: '商品情報を更新しました。'
+  #   else
+  #     render :edit, status: :unprocessable_entity
+  #   end
+  # end
+
+  # def show
+  # end
+  
+  # def destroy
+  #   item = Item.find(params[:id])
+  #   if current_user.id == item.user_id
+  #     item.destroy
+  #   end
+  #   redirect_to root_path
+  # end
 
   private
 
