@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:edit, :update, :show]
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
@@ -18,22 +19,21 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def edit
-  #   if current_user != @item.user || Order.exists?(item_id: @item.id)
-  #     redirect_to root_path
-  #   end
-  # end
+  def edit
+    if @item.user != current_user
+      redirect_to root_path
+    end
+  end
 
-  # def update
-  #   if @item.update(item_params)
-  #     redirect_to item_path(@item), notice: '商品情報を更新しました。'
-  #   else
-  #     render :edit, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item), notice: '商品情報を更新しました。'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   # def destroy
