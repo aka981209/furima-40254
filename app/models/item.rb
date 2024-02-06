@@ -5,11 +5,11 @@ class Item < ApplicationRecord
   # has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category
-  belongs_to :sales_status
-  belongs_to :shipping_fee_status
+  belongs_to :item_category
+  belongs_to :item_sales_status
   belongs_to :prefecture
-  belongs_to :scheduled_delivery
+  belongs_to :item_scheduled_delivery
+  belongs_to :item_shipping_fee_status
 
   validates :image, presence: true
   validates :item_name, presence: true
