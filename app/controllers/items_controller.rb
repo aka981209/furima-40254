@@ -1,6 +1,5 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  
 
   def index
     @items = Item.order('created_at DESC')
@@ -18,10 +17,9 @@ class ItemsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
-  
+
   # def edit
-  #   if current_user != @item.user || Order.exists?(item_id: @item.id) 
+  #   if current_user != @item.user || Order.exists?(item_id: @item.id)
   #     redirect_to root_path
   #   end
   # end
@@ -34,9 +32,10 @@ class ItemsController < ApplicationController
   #   end
   # end
 
-  # def show
-  # end
-  
+  def show
+    @item = Item.find(params[:id])
+  end
+
   # def destroy
   #   item = Item.find(params[:id])
   #   if current_user.id == item.user_id
@@ -57,6 +56,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to action: :index if @item.user_id != current_user.id || !@item.order.nil?
+    redirect_to action: :index if @item.user_id != current_user.id
   end
 end

@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   has_one_attached :image
   belongs_to :user
   # has_one :order
@@ -15,7 +14,7 @@ class Item < ApplicationRecord
   validates :item_name, presence: true
   validates :item_info, presence: true
   validates :item_price, presence: true,
-                    numericality: { only_integer: true, message: 'is invalid. Input integer value in half-width characters' }
+                         numericality: { only_integer: true, message: 'is invalid. Input integer value in half-width characters' }
   validates :item_price, numericality: { in: 300..9_999_999, message: 'is out of setting range' }
   validates :item_category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :item_sales_status_id, numericality: { other_than: 1, message: "can't be blank" }
