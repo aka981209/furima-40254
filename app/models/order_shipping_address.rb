@@ -1,4 +1,4 @@
-class OrderShippingAddress 
+class OrderShippingAddress
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number, :token
 
@@ -18,6 +18,6 @@ class OrderShippingAddress
     # binding.pry
     order = Order.create(user_id:, item_id:)
     ShippingAddress.create(postal_code:, prefecture_id:, city:, addresses:, building:,
-                    phone_number:, order_id: order.id)
+                           phone_number:, order_id: order.id)
   end
 end

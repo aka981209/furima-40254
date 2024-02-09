@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-  
+
   def move_to_root
     return if @item.order.nil?
 
