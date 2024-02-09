@@ -1,6 +1,3 @@
-window.addEventListener('turbo:load', price);
-window.addEventListener('turbo:render', price);
-
 function price() {
   const priceInput = document.getElementById("item-price");
   const add_tax_price = document.getElementById("add-tax-price");
@@ -18,3 +15,6 @@ function price() {
     profit.innerHTML = profit_value.toLocaleString();
   });
 };
+
+window.addEventListener('turbo:load', price);
+window.addEventListener('turbo:render', price);
