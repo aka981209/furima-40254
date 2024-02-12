@@ -5,13 +5,13 @@ class OrdersController < ApplicationController
 
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @item = Item.find(params[:item_id])
+
     redirect_to root_path if user_signed_in? && current_user.id == @item.user_id
     @order_shipping_address = OrderShippingAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_shipping_address = OrderShippingAddress.new(order_params)
 
     if @order_shipping_address.valid?
@@ -26,10 +26,6 @@ class OrdersController < ApplicationController
 
   private
 
-  def item_params
-    params.require(:item).permit(:item_name, :item_info, :item_category_id, :item_sales_status_id, :item_shipping_fee_status_id, :prefecture_id,
-                                 :item_scheduled_delivery_id, :item_price, :image).merge(user_id: current_user.id)
-  end
 
   def order_params
     params.require(:order_shipping_address).permit(:postal_code, :prefecture_id, :city, :addresses, :building, :phone_number).merge(
@@ -42,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = 'sk_test_0191ea891ee5a973aab0290d'
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: Item.find(params[:item_id]).item_price, # 商品の値段
       card: order_params[:token], # カードト ークン
